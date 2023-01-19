@@ -26,7 +26,7 @@ const Home = (props: Props) => {
     };
 
     fetchData();
-  }, [data]);
+  }, []);
 
   //delete request
   const onDelete = async (id: string) => {
