@@ -41,13 +41,13 @@ const CreateJobs = (props: Props) => {
       jobExperience: jobExperience,
       date: dayjs(value).format("YYYY-MM-DD"),
     };
-    body;
+
     try {
       const url = "http://localhost:8080/api/jobs";
       await axios.post(url, body);
       navigate("/");
     } catch (error: any) {
-      error.response;
+      console.log(error.response);
 
       if (
         error.response &&
