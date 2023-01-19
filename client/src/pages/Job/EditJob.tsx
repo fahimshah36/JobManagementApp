@@ -2,8 +2,6 @@ import {
   Alert,
   Button,
   Container,
-  FormControl,
-  Input,
   InputLabel,
   MenuItem,
   Paper,
@@ -27,16 +25,6 @@ const CreateJobs = (props: Props) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>();
 
-  const fetchData = async () => {
-    const url = `http://localhost:8080/api/jobs/${id}`;
-    const data = await axios.get(url);
-    setData(data.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const [data, setData] = useState<IJobDataType>({
     _id: id as string,
     date: "",
@@ -51,6 +39,16 @@ const CreateJobs = (props: Props) => {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [jobExperience, setJobExperience] = useState<number>(0);
   const [value, setValue] = useState<Dayjs | null>(dayjs(""));
+
+  const fetchData = () => {
+    const url = `http://localhost:8080/api/jobs/${id}`;
+    axios.get(url).then((response) => {
+      setData(response.data);
+    });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (data.jobCategory) {
