@@ -40,15 +40,12 @@ const CreateJobs = (props: Props) => {
   const [jobExperience, setJobExperience] = useState<number>(0);
   const [value, setValue] = useState<Dayjs | null>(dayjs(""));
 
-  const fetchData = () => {
+  useEffect(() => {
     const url = `http://localhost:8080/api/jobs/${id}`;
     axios.get(url).then((response) => {
       setData(response.data);
     });
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (data.jobCategory) {
